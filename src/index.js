@@ -3,6 +3,7 @@ import render from './render'
 import bookmark from './bookmark'
 import store from './store' 
 import './style.css'
+import api from './api';
 
 
 //// PAGE TO HOUSE MAIN FUNCTION ////////
@@ -11,10 +12,14 @@ import './style.css'
 // main function - pass in all event listeners + render
 
 function main() {
-  console.log('is main working?')
+  console.log('main is working')
   bookmark.whenAddButtonIsClicked();
-  render();
-  // watchForm()
+  bookmark.addNewBookmark();
+  api.getItems().then(items => {
+    store.addItems(items)
+    render();
+  })
+  //bookmark.collapsedView();
 }
 
 

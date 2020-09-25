@@ -18,6 +18,10 @@ const findById = function (id) {
 const addItem = function (item) {
     this.bookmarks.push(item);
 };
+
+const addItems = function (items) {
+    this.bookmarks.push(...items);
+};
   
 //delete item
 const findAndDelete = function (id) {
@@ -56,5 +60,14 @@ export default {
     error,
     filter,
     adding,
-    filteredBookmarks
+    filteredBookmarks,
+    findById,
+    addItem,
+    addItems,
+    findAndDelete,
+    findAndUpdate,
+    filterBookmarks,
+    ratingfilter,
+    setError,
+
 }

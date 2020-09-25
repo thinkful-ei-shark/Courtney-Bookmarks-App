@@ -34,13 +34,13 @@ const bookmarkApiFetch = function (...args) {
 //GET function to get from api
 function getItems() {
     console.log(getItems)
-    return bookmarkApiFetch(`${BASE_URL}/items`)
+    return bookmarkApiFetch(`${BASE_URL}/bookmarks`)
 }
 
 //POST function to create item
-const createItem = function (name) {
-   const newItem = JSON.stringify({ name })
-    return fetch(`${BASE_URL}/items`, {
+const createItem = function (item) {
+   const newItem = JSON.stringify(item)
+    return fetch(`${BASE_URL}/bookmarks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
        body: newItem
@@ -51,7 +51,7 @@ const createItem = function (name) {
 //PATCH (modifies 1 item) function to edit item
 const updateItem = function (id, updateData) {
     const newData = JSON.stringify(updateData)
-    return fetch(`${BASE_URL}/items/${id}`, {
+    return fetch(`${BASE_URL}/bookmarks/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: newData
@@ -60,7 +60,7 @@ const updateItem = function (id, updateData) {
 
 //DELETE function to delete 
 const deleteItem = function (id) {
-    return fetch(BASE_URL + '/items/' + id, {
+    return fetch(BASE_URL + '/bookmarks/' + id, {
         method: 'DELETE'
     });
 }

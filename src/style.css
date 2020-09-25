@@ -4,5 +4,14 @@ body{
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.bookmark-collapsed {
+    display: none;
+}
+
+.bookmark-expanded {
+    
 }
 

@@ -13,34 +13,67 @@ function whenAddButtonIsClicked() {
         event.preventDefault();
         console.log('whenAddButtonIsClicked ran')
         store.adding = true;
-         render();
+        render();
+        // I want the start page buttons to stay up when the new page loads
     })
 };
 
 
-
-
-
 // EVENT LIST. FOR WHEN ADD NEW BUTTON IS CLICKED TO ADD NEW CONTENT TO LIST 
-
-
-
-
-//WATCH FORM 
 //- watch for click of sumbit - to get info on input
 function addNewBookmark() {
-    $('#js-bookmark-form').on('submit', function (event) {
+    $('body').on('click', '#save', function (event) {
         event.preventDefault();
-        let userWebsite = $(".js-url").val();
-        let userDescription = $('.js-description').val();
-        console.log(userDescription, userWebsite)
-    })
-}
+        console.log('addNewBookmark ran')
+        let newTitle = $('#bookmark-title').val();
+        let newUrl = $('#url').val();
+        let newDescription = $('#description').val();
+      
+        // let newRating = 
+        
+        let newBookmark = {
+            title: newTitle,
+            url: newUrl,
+            desc: newDescription,
+            rating: 2,
+        };
+        console.log(newBookmark);
+        
+        api.createItem(newBookmark)
+            .then(res => {
+                if (res.ok) return res.json()
+                throw new Error(res.statusText)
+                
+            })
+            .then((newBookmark) => {
+                store.addItem(newBookmark)
+                store.adding = false;
+                render();
+
+            })
+        .catch(error => console.log(error))
+
+        
+    });
+};
+
+//////////////////////////////////
+//EVENT LISTENER FOR SHOWING BOOKMARKS COLLAPSED VIEW 
+/////////////////////////////////
+// function collapsedView() {
+//     $('main').on('click', '#save', function (event) {
+//         event.preventDefault();
+//         console.log('collapsedView ran');
+//         return $('.toggle-button').toggleClass('hide');
+//         render()
+//     })
+// }
 
 
 export default {
-   //watchForm,
-    whenAddButtonIsClicked
+    whenAddButtonIsClicked,
+    addNewBookmark,
+   // collapsedView
 }
 
 
