@@ -15,11 +15,14 @@ function main() {
   console.log('main is working')
   bookmark.whenAddButtonIsClicked();
   bookmark.addNewBookmark();
+  bookmark.getBookmarkId();
+  bookmark.expandBookmark();
+  bookmark.collapseBookmark();
+  
   api.getItems().then(items => {
     store.addItems(items)
     render();
   })
-  //bookmark.collapsedView();
 }
 
 

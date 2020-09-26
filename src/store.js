@@ -11,21 +11,22 @@ let filteredBookmarks = [];
 
 // function to find by id
 const findById = function (id) {
-    return this.items.find(bookmarks => currentBookmark.id === id);
+    return bookmarks.find(bookmark => bookmark.id === id);
 };
  
 //add item 
 const addItem = function (item) {
-    this.bookmarks.push(item);
+    item.expanded = false;
+    bookmarks.push(item);
 };
 
 const addItems = function (items) {
-    this.bookmarks.push(...items);
+    bookmarks.push(...items);
 };
   
 //delete item
 const findAndDelete = function (id) {
-    this.bookmarks = this.bookmark.filter(currentBookmark => currentBookmark.id !== id);
+    bookmarks = bookmark.filter(currentBookmark => currentBookmark.id !== id);
   };
 
 
@@ -38,21 +39,33 @@ const findAndDelete = function (id) {
 
   // filter 
   const filterBookmarks = function (rating){
-    this.filter = true;
-    this.bookmarks.forEach(bookmark => {
+    filter = true;
+    bookmarks.forEach(bookmark => {
         if(bookmark.rating >= rating) {
-            this.filterBookmarks.push(bookmark);
+            bookmarks.push(bookmark);
         } 
     })
-};
+  };
+
+//expand/collapse
+// const expandCollapse = function (id) {
+//     let bookmark = bookmarks.find(bookmark => bookmark.id === id)
+//     return bookmark.expanded = !bookmark.expanded;
+//     }
+
+
+// const toggleExpandBookmark = function (id) {
+//     const item = this.bookmarks.find(currentItem => currentItem.id === id);
+//     item.expanded = !item.expanded;
+//   };
 
 //  for ratings 
 const ratingfilter = function (value) {
-    this.ratingfilter = value;
+    ratingfilter = value;
 } 
 
 const setError = function (error) {
-    this.error = error;
+    error = error;
   };
 
 export default {
@@ -67,6 +80,8 @@ export default {
     findAndDelete,
     findAndUpdate,
     filterBookmarks,
+    //toggleExpandBookmark,
+  // expandCollapse,
     ratingfilter,
     setError,
 

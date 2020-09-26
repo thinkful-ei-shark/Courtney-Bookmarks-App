@@ -1,7 +1,7 @@
 // PAGE TO HOUSE ALL API FUNCITONS 
 
 
-const BASE_URL = 'https://thinkful-list-api.herokuapp.com/courtneycarson';
+const BASE_URL = 'https://thinkful-list-api.herokuapp.com/courtney';
 
 
 //fetch api & error handling
@@ -60,7 +60,7 @@ const updateItem = function (id, updateData) {
 
 //DELETE function to delete 
 const deleteItem = function (id) {
-    return fetch(BASE_URL + '/bookmarks/' + id, {
+  return fetch(`${ BASE_URL }/bookmarks/${id}`, {
         method: 'DELETE'
     });
 }

@@ -24,6 +24,8 @@ function loadStartPage(bookmarks) {
         </select>
         </form>
         </div>`
+    
+    
     for (let i = 0; i < bookmarks.length; i++) {
         startPage += renderBookmark(bookmarks[i])
     }
@@ -35,25 +37,39 @@ function loadStartPage(bookmarks) {
 
 function renderBookmark(bookmark) {
     console.log(bookmark)
-    let html = `
-    <div class="bookmark">
-        <h3><a href=''>${bookmark.title} 
-        <button id='toggle-button'>view</button></a></h3>
+    if (!bookmark.expanded) {
+        return `<div class="bookmark-section" data-item-id="${bookmark.id}">
+                <div>
+                <h3><a href=''>${bookmark.title} ${bookmark.rating}</a>               
+                 <button id='expand'>expand</button>
+                </h3>
+                </div>
+                 </div>`
+    }
+    else {
+        return `<div class= "bookmark-section" data-item-id="${bookmark.id}">
         
-        <div class= '${bookmark.expanded? "bookmark-expanded": "bookmark-collapsed"}'>
-        <p>${bookmark.url}</p>  
-     <p<${bookmark.description}</p>
-        <button>Delete</button>
-        </div>
-</div>`
-return html;
+             <h3><a href=''>${bookmark.title} ${bookmark.rating}</a></h3>
+             <button id='collapse'>collapse</button>
+                <p>${bookmark.url}</p>  
+                <p<${bookmark.description}</p>
+                <button id='delete'>Delete</button>
+        </div>`
+        };
 };
 
-/////////////////////////////////////////////////
-// Bookmark List View - 1. a text box for adding new bookmark name - 2. URL text box - 3. description text box 4. submit button
-/////////////////////////////////////////////////
-function addingBookMark() {
-    let bookMarkList = `
+    //
+
+    // function renderExpandedView(bookmark) {
+    //     console.log('renderExpandedView ran')
+    //     let expandedView = ``
+    // }
+
+    /////////////////////////////////////////////////
+    // Bookmark List View - 1. a text box for adding new bookmark name - 2. URL text box - 3. description text box 4. submit button
+    /////////////////////////////////////////////////
+    function addingBookMark() {
+        let bookMarkList = `
     <form id="new-bookmark>
     < div class = 'bookmark'>
         <label id = "bookmark-name"> Bookmark Name:</label>
@@ -75,31 +91,60 @@ function addingBookMark() {
         <button type='submit' id='save'>Add</button>
     </div> 
     </form>`
-    return bookMarkList;
-}
-
-
-
-
-
-
-
-// Editing Bookmark (text box & button)
-// function editingBookmarkList(bookmark,rating) {
-//     let editBookmark = `
-//     `<div class="bookmark-expand" id=
-// }
-
-////////////////////////////////////////////////////////
-// render function
-////////////////////////////////////////////////////////
-function render() {
-    console.log('render is working')
-    if (!store.adding) {
-        $('body').html(loadStartPage(store.bookmarks));
-    } else {
-        $('body').html(addingBookMark());
+        return bookMarkList;
     }
-};
+
+
+
+
+
+
+    // Editing Bookmark (text box & button)
+    // function editingBookmarkList(bookmark,rating) {
+    //     let editBookmark = `
+    //     `<div class="bookmark-expand" id=
+    // }
+
+    ////////////////////////////////////////////////////////
+    // render function
+    ////////////////////////////////////////////////////////
+    function render() {
+        console.log('render is working')
+        if (!store.adding) {
+            $('body').html(loadStartPage(store.bookmarks));
+        } else {
+            $('body').html(addingBookMark());
+        }
+    };
 
 export default render;
+    
+
+
+
+
+
+/// backup  bc i am going to make changes to the expand/collapse
+////function renderBookmark(bookmark) {
+//     console.log(bookmark)
+//     if (!bookmark.expand) {
+//         return `<div class="bookmark" data-item-id="${bookmark.id}">
+//                 <div>
+//                 <h3><a href=''>${bookmark.title} ${bookmark.rating}</a></h3>
+//                 </div>
+//                 <div>
+//                 <button id='expand'>expand</button>
+//                 </div>  
+//                  </div>`
+//     }
+//     else {
+//         return `<div class= "bookmark" data-item-id="${bookmark.id}">
+//         </div>
+//              <h3><a href=''>${bookmark.title} ${bookmark.rating}</a></h3>
+//              <button id='collapse'>collapse</button>
+//                 <p>${bookmark.url}</p>  
+//                 <p<${bookmark.description}</p>
+//                 <button>Delete</button>
+//         </div>`
+//         };
+// };

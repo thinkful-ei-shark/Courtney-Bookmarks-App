@@ -29,7 +29,7 @@ function addNewBookmark() {
         let newUrl = $('#url').val();
         let newDescription = $('#description').val();
       
-        // let newRating = 
+    
         
         let newBookmark = {
             title: newTitle,
@@ -57,93 +57,61 @@ function addNewBookmark() {
     });
 };
 
-//////////////////////////////////
-//EVENT LISTENER FOR SHOWING BOOKMARKS COLLAPSED VIEW 
-/////////////////////////////////
-// function collapsedView() {
-//     $('main').on('click', '#save', function (event) {
-//         event.preventDefault();
-//         console.log('collapsedView ran');
-//         return $('.toggle-button').toggleClass('hide');
-//         render()
-//     })
-// }
+////// FUNCTION 
+function getBookmarkId(bookmark) {
+    return $(bookmark).closest('.bookmark-section').data('item-id');
+}
+
+
+/// function to show expanded view
+ function expandBookmark() {
+    $('body').on('click', '#expand', function (event) {
+        const id = getBookmarkId(event.currentTarget);
+        console.log('expandBookmark ran')
+        console.log(id)
+    
+        store.findById(id).expanded = !store.findById(id).expanded;
+        render();      
+    })
+ }
+
+function collapseBookmark() {
+    $('body').on('click', '#collapse', function (event) {
+        const id = getBookmarkId(event.currentTarget);
+        console.log('collapseBookmark ran');
+        console.log(event.currentTarget)
+        console.log(id)
+        store.findById(id).expanded = !store.findById(id).expanded;
+        render();   
+    })
+}
+
+function deleteBookmark() {
+    $('main').on('click', function (event) {
+        event.preventDefault();
+        const id = getBookmarkId(event.currentTarget);
+    
+            api.deleteItem(id)
+             .then(()=> {
+                 store.findAndDelete(id);
+                 console.log(id);
+                 render();
+             })
+            //  .catch((error) => {
+            //      console.log(error);
+            //      store.setError(error.message);
+            //      //renderError();
+            // //  });
+        });
+    }
 
 
 export default {
     whenAddButtonIsClicked,
     addNewBookmark,
-   // collapsedView
+    getBookmarkId,
+   // expandCollapseBookmark,
+    expandBookmark,
+   collapseBookmark,
+    //deleteBookmark,
 }
-
-
-
-
-
-// // PAGE FOR INPUT TO GO 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // const generateBookmarkItemsString = function (bookmarkList) {
-// //     const items = bookmarkList.map((item) => generateItemElement(item));
-// //     return items.join('');
-// // };
-
-
-// // const render = function () {
-// //     // Filter item list if store prop is true by item.checked === false
-// //     let items = [...store.bookmarks];
-// //     if (store.adding) {
-// //       items = items.filter(item => !item.adding);
-// //     }
-// //     // render the shopping list in the DOM
-// //     const bookmarkItemsString = generateBookmarkItemsString(items);
-// //     // insert that HTML into the DOM
-// //     $('.js-bookmark-list').html(bookmarkItemsString);
-// //   };  
-
-
-
-
-
-// //submit button + when they input into text field ///
-
-// // const handleNewItemSubmit = function () {
-// //     $('#js-bookmark-form').submit(function (event) {
-// //       event.preventDefault();
-// //       const newItemName = $('.js-bookmark-entry').val();
-// //       $('.js-bookmark-entry').val('');
-
-
-// //       api.createItem(newItemName)
-// //         .then(res => res.json())
-// //         .then((newItem) => {
-// //           store.addItem(newItem)
-// //           render();
-// //         })
-// //     });
-// //     console.log(newItemName)
-// // };
-
