@@ -58,12 +58,6 @@ function renderBookmark(bookmark) {
         };
 };
 
-    //
-
-    // function renderExpandedView(bookmark) {
-    //     console.log('renderExpandedView ran')
-    //     let expandedView = ``
-    // }
 
     /////////////////////////////////////////////////
     // Bookmark List View - 1. a text box for adding new bookmark name - 2. URL text box - 3. description text box 4. submit button
@@ -96,15 +90,6 @@ function renderBookmark(bookmark) {
 
 
 
-
-
-
-    // Editing Bookmark (text box & button)
-    // function editingBookmarkList(bookmark,rating) {
-    //     let editBookmark = `
-    //     `<div class="bookmark-expand" id=
-    // }
-
     ////////////////////////////////////////////////////////
     // render function
     ////////////////////////////////////////////////////////
@@ -119,32 +104,3 @@ function renderBookmark(bookmark) {
 
 export default render;
     
-
-
-
-
-
-/// backup  bc i am going to make changes to the expand/collapse
-////function renderBookmark(bookmark) {
-//     console.log(bookmark)
-//     if (!bookmark.expand) {
-//         return `<div class="bookmark" data-item-id="${bookmark.id}">
-//                 <div>
-//                 <h3><a href=''>${bookmark.title} ${bookmark.rating}</a></h3>
-//                 </div>
-//                 <div>
-//                 <button id='expand'>expand</button>
-//                 </div>  
-//                  </div>`
-//     }
-//     else {
-//         return `<div class= "bookmark" data-item-id="${bookmark.id}">
-//         </div>
-//              <h3><a href=''>${bookmark.title} ${bookmark.rating}</a></h3>
-//              <button id='collapse'>collapse</button>
-//                 <p>${bookmark.url}</p>  
-//                 <p<${bookmark.description}</p>
-//                 <button>Delete</button>
-//         </div>`
-//         };
-// };

@@ -26,8 +26,15 @@ const addItems = function (items) {
   
 //delete item
 const findAndDelete = function (id) {
-    bookmarks = bookmark.filter(currentBookmark => currentBookmark.id !== id);
-  };
+    bookmarks = bookmark.filter(currentBookmark => {
+        if (currentBookmark.id !== id) {
+            return true;
+        }
+        else {
+            return false;
+        };
+    });
+};
 
 
   //update item
@@ -47,17 +54,6 @@ const findAndDelete = function (id) {
     })
   };
 
-//expand/collapse
-// const expandCollapse = function (id) {
-//     let bookmark = bookmarks.find(bookmark => bookmark.id === id)
-//     return bookmark.expanded = !bookmark.expanded;
-//     }
-
-
-// const toggleExpandBookmark = function (id) {
-//     const item = this.bookmarks.find(currentItem => currentItem.id === id);
-//     item.expanded = !item.expanded;
-//   };
 
 //  for ratings 
 const ratingfilter = function (value) {
@@ -80,8 +76,6 @@ export default {
     findAndDelete,
     findAndUpdate,
     filterBookmarks,
-    //toggleExpandBookmark,
-  // expandCollapse,
     ratingfilter,
     setError,
 

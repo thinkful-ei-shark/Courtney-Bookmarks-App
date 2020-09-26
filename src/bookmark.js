@@ -87,9 +87,11 @@ function collapseBookmark() {
 }
 
 function deleteBookmark() {
-    $('main').on('click', function (event) {
+    $('main').on('click', '#delete', function (event) {
         event.preventDefault();
+        console.log('deleteBookmark ran')
         const id = getBookmarkId(event.currentTarget);
+        console.log(id)
     
             api.deleteItem(id)
              .then(()=> {
@@ -97,11 +99,11 @@ function deleteBookmark() {
                  console.log(id);
                  render();
              })
-            //  .catch((error) => {
-            //      console.log(error);
-            //      store.setError(error.message);
-            //      //renderError();
-            // //  });
+             .catch((error) => {
+                 console.log(error);
+                 store.setError(error.message);
+                 renderError();
+             });
         });
     }
 
@@ -110,8 +112,7 @@ export default {
     whenAddButtonIsClicked,
     addNewBookmark,
     getBookmarkId,
-   // expandCollapseBookmark,
     expandBookmark,
-   collapseBookmark,
-    //deleteBookmark,
+    collapseBookmark,
+    deleteBookmark,
 }
