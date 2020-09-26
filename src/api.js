@@ -60,7 +60,8 @@ const updateItem = function (id, updateData) {
 
 //DELETE function to delete 
 const deleteItem = function (id) {
-  return fetch(`${ BASE_URL }/bookmarks/${id}`, {
+  console.log('delete r')
+  return bookmarkApiFetch(`${ BASE_URL }/bookmarks/${id}`, {
         method: 'DELETE'
     });
 }

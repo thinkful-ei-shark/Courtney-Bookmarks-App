@@ -59,7 +59,9 @@ function addNewBookmark() {
 
 ////// FUNCTION 
 function getBookmarkId(bookmark) {
-    return $(bookmark).closest('.bookmark-section').data('item-id');
+    return $(bookmark)
+        .closest('.bookmark-section')
+        .data('item-id');
 }
 
 
@@ -86,8 +88,10 @@ function collapseBookmark() {
     })
 }
 
+
+//////////// Delete Button Event Listener
 function deleteBookmark() {
-    $('main').on('click', '#delete', function (event) {
+    $('body').on('click', '#delete', function (event) {
         event.preventDefault();
         console.log('deleteBookmark ran')
         const id = getBookmarkId(event.currentTarget);
@@ -98,12 +102,12 @@ function deleteBookmark() {
                  store.findAndDelete(id);
                  console.log(id);
                  render();
-             })
-             .catch((error) => {
-                 console.log(error);
-                 store.setError(error.message);
-                 renderError();
-             });
+              })
+            //  .catch((error) => {
+            //      console.log(error);
+            //      store.setError(error.message);
+            //      renderError();
+            //  });
         });
     }
 

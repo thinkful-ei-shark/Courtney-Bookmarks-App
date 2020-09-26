@@ -24,13 +24,22 @@ function loadStartPage(bookmarks) {
         </select>
         </form>
         </div>`
-    
-    
+
+
     for (let i = 0; i < bookmarks.length; i++) {
         startPage += renderBookmark(bookmarks[i])
     }
     return startPage;
 }
+
+// const renderError = function () {
+//     if (store.error) {
+//       const el = generateError(store.error);
+//       $('.error-container').html(el);
+//     } else {
+//       $('.error-container').empty();
+//     }
+//   };
 ////////////////////////////////////////////////////////
 // FUNCTION FOR A COLLAPSED VIEW ?
 ////////////////////////////////////////////////////////
@@ -39,31 +48,27 @@ function renderBookmark(bookmark) {
     console.log(bookmark)
     if (!bookmark.expanded) {
         return `<div class="bookmark-section" data-item-id="${bookmark.id}">
-                <div>
-                <h3><a href=''>${bookmark.title} ${bookmark.rating}</a>               
-                 <button id='expand'>expand</button>
+                <h3>${bookmark.title} ${bookmark.rating}               
+                 <button id='expand'>Expand</button>
                 </h3>
-                </div>
                  </div>`
-    }
-    else {
-        return `<div class= "bookmark-section" data-item-id="${bookmark.id}">
-        
-             <h3><a href=''>${bookmark.title} ${bookmark.rating}</a></h3>
-             <button id='collapse'>collapse</button>
-                <p>${bookmark.url}</p>  
-                <p<${bookmark.description}</p>
+    } else {
+        return ` <div class= "bookmark-section" data-item-id="${bookmark.id}">
+             <h3>${bookmark.title} ${bookmark.rating}</h3>
+             <button id='collapse'>Collapse</button>
+                <p><a href=''>${bookmark.url}</a></p>  
+                <p><${bookmark.description}</p>
                 <button id='delete'>Delete</button>
         </div>`
-        };
+    };
 };
 
 
-    /////////////////////////////////////////////////
-    // Bookmark List View - 1. a text box for adding new bookmark name - 2. URL text box - 3. description text box 4. submit button
-    /////////////////////////////////////////////////
-    function addingBookMark() {
-        let bookMarkList = `
+/////////////////////////////////////////////////
+// Bookmark List View - 1. a text box for adding new bookmark name - 2. URL text box - 3. description text box 4. submit button
+/////////////////////////////////////////////////
+function addingBookMark() {
+    let bookMarkList = `
     <form id="new-bookmark>
     < div class = 'bookmark'>
         <label id = "bookmark-name"> Bookmark Name:</label>
@@ -85,22 +90,21 @@ function renderBookmark(bookmark) {
         <button type='submit' id='save'>Add</button>
     </div> 
     </form>`
-        return bookMarkList;
+    return bookMarkList;
+}
+
+
+
+////////////////////////////////////////////////////////
+// render function
+////////////////////////////////////////////////////////
+function render() {
+    console.log('render is working')
+    if (!store.adding) {
+        $('body').html(loadStartPage(store.bookmarks));
+    } else {
+        $('body').html(addingBookMark());
     }
-
-
-
-    ////////////////////////////////////////////////////////
-    // render function
-    ////////////////////////////////////////////////////////
-    function render() {
-        console.log('render is working')
-        if (!store.adding) {
-            $('body').html(loadStartPage(store.bookmarks));
-        } else {
-            $('body').html(addingBookMark());
-        }
-    };
+};
 
 export default render;
-    

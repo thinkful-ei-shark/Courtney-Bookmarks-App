@@ -18,6 +18,7 @@ function main() {
   bookmark.getBookmarkId();
   bookmark.expandBookmark();
   bookmark.collapseBookmark();
+  bookmark.deleteBookmark();
   
   api.getItems().then(items => {
     store.addItems(items)

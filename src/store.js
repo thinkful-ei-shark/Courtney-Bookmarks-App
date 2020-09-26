@@ -26,20 +26,20 @@ const addItems = function (items) {
   
 //delete item
 const findAndDelete = function (id) {
-    bookmarks = bookmark.filter(currentBookmark => {
+   let bookmark = bookmarks.filter(currentBookmark => {
         if (currentBookmark.id !== id) {
             return true;
         }
         else {
             return false;
-        };
+       };
     });
 };
-
+// bookmarks = bookmarks.filter(currentBookmark => {
 
   //update item
-  const findAndUpdate = function (id, newItem) {
-    const currentBookmark = this.findById(id);
+  const findAndUpdate = function (id, newItem){
+    let currentBookmark = findById(id);
     Object.assign(currentBookmark, newItem);
   };
 
