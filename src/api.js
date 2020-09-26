@@ -1,7 +1,7 @@
 // PAGE TO HOUSE ALL API FUNCITONS 
 
 
-const BASE_URL = 'https://thinkful-list-api.herokuapp.com/courtney';
+const BASE_URL = 'https://thinkful-list-api.herokuapp.com/carson';
 
 
 //fetch api & error handling
@@ -60,8 +60,8 @@ const updateItem = function (id, updateData) {
 
 //DELETE function to delete 
 const deleteItem = function (id) {
-  console.log('delete r')
-  return bookmarkApiFetch(`${ BASE_URL }/bookmarks/${id}`, {
+  console.log('delete res')
+  return bookmarkApiFetch(`${BASE_URL}/bookmarks/${id}`, {
         method: 'DELETE'
     });
 }

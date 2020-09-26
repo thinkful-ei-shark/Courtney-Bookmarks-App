@@ -28,32 +28,32 @@ function addNewBookmark() {
         let newTitle = $('#bookmark-title').val();
         let newUrl = $('#url').val();
         let newDescription = $('#description').val();
-      
-    
-        
+        let newRating = $(this).parent().parent().find('select');
+        store.adding = false;
+
+
         let newBookmark = {
             title: newTitle,
             url: newUrl,
             desc: newDescription,
-            rating: 2,
+            rating: parseInt(newRating.val()),
         };
         console.log(newBookmark);
-        
+
         api.createItem(newBookmark)
             .then(res => {
                 if (res.ok) return res.json()
                 throw new Error(res.statusText)
-                
+
             })
             .then((newBookmark) => {
                 store.addItem(newBookmark)
-                store.adding = false;
                 render();
 
             })
-        .catch(error => console.log(error))
+            .catch(error => console.log(error))
 
-        
+
     });
 };
 
@@ -66,16 +66,16 @@ function getBookmarkId(bookmark) {
 
 
 /// function to show expanded view
- function expandBookmark() {
+function expandBookmark() {
     $('body').on('click', '#expand', function (event) {
         const id = getBookmarkId(event.currentTarget);
         console.log('expandBookmark ran')
         console.log(id)
-    
+
         store.findById(id).expanded = !store.findById(id).expanded;
-        render();      
+        render();
     })
- }
+}
 
 function collapseBookmark() {
     $('body').on('click', '#collapse', function (event) {
@@ -84,39 +84,47 @@ function collapseBookmark() {
         console.log(event.currentTarget)
         console.log(id)
         store.findById(id).expanded = !store.findById(id).expanded;
-        render();   
+        render();
     })
 }
 
 ///// have to delete right item, possibly by finding the id for it - function runs, just does not delete item.
 //////////// Delete Button Event Listener
 function deleteBookmark() {
-    $('body').on('click', '#delete', function (event) {
-        event.preventDefault();
-        console.log('deleteBookmark ran')
+    $('body').on('click', '#delete-button', function (event) {
         const id = getBookmarkId(event.currentTarget);
         console.log(id)
-    
-            api.deleteItem(id)
-             .then(()=> {
-                 store.findAndDelete(id);
-                 console.log(id);
-                 render();
-              })
-            //  .catch((error) => {
-            //      console.log(error);
-            //      store.setError(error.message);
-            //      renderError();
-            //  });
-        });
-    }
+        api.deleteItem(id)
+            .then(() => {
+               return store.findAndDelete(id);
+                // console.log('this is delete bookmark', store.bookmarks);
+              //  store.adding = false;
+                // render();
+            }).then(() => render())
+            .catch((error) => {
+                store.setError(error.message);
+            });
+    });
+};
+
+
+
+function eventBinder() {
+    $('.js-filter-by-rating').on('change', (e) => {
+        store.changeFilter(e.currentTarget.value);
+        console.log('working')
+        return render();
+    })
+    whenAddButtonIsClicked();
+    addNewBookmark();
+    getBookmarkId();
+    expandBookmark();
+    collapseBookmark();
+    deleteBookmark();
+}
+
 
 
 export default {
-    whenAddButtonIsClicked,
-    addNewBookmark,
-    getBookmarkId,
-    expandBookmark,
-    collapseBookmark,
-    deleteBookmark,
+    eventBinder
 }

@@ -7,39 +7,37 @@ import store from './store'
 // Starting View 
 ////////////////////////////////////////////////////////
 
-function loadStartPage(bookmarks) {
+function loadStartPage() {
+    const bookmarks = store.bookmarks;
+
     let startPage = `
     <div class="new-button>
     <form  class = "button">
         <button type="submit" id="add-new-button">Add Bookmark</button>
-      
-
+    
         <label id="filter-dropdown"> Filter By Rating:</label>
-        <select name="filterby" id="filter">
-          <option value="1star">1 star</option>
-          <option value="2star">2 star</option>
-          <option value="3star">3 star</option>
-          <option value="4star">4 star</option>
-          <option value="5star">5 star</option>
+        <select name="filterby" class="js-filter-by-rating" id="filter">
+          <option value="1">1 star</option>
+          <option value="2">2 star</option>
+          <option value="3">3 star</option>
+          <option value="4">4 star</option>
+          <option value="5">5 star</option>
         </select>
         </form>
         </div>`
-
-
-    for (let i = 0; i < bookmarks.length; i++) {
-        startPage += renderBookmark(bookmarks[i])
+    if (store.bookmarks.length === 0) {
+        startPage += `<h1>No Bookmarks Found</h1>`
+    }
+    else {
+        for (let i = 0; i < bookmarks.length; i++) {
+            startPage += renderBookmark(bookmarks[i])
+        }
     }
     return startPage;
 }
 
-// const renderError = function () {
-//     if (store.error) {
-//       const el = generateError(store.error);
-//       $('.error-container').html(el);
-//     } else {
-//       $('.error-container').empty();
-//     }
-//   };
+
+
 ////////////////////////////////////////////////////////
 // FUNCTION FOR A COLLAPSED VIEW ?
 ////////////////////////////////////////////////////////
@@ -48,17 +46,17 @@ function renderBookmark(bookmark) {
     console.log(bookmark)
     if (!bookmark.expanded) {
         return `<div class="bookmark-section" data-item-id="${bookmark.id}">
-                <h3>${bookmark.title} ${bookmark.rating}               
+                <h3>${bookmark.title} ${bookmark.rating ? bookmark.rating : 'No Rating'}               
                  <button id='expand'>Expand</button>
                 </h3>
                  </div>`
     } else {
         return ` <div class= "bookmark-section" data-item-id="${bookmark.id}">
-             <h3>${bookmark.title} ${bookmark.rating}</h3>
+             <h3>${bookmark.title} ${bookmark.rating ? bookmark.rating : 'No Rating'}</h3>
              <button id='collapse'>Collapse</button>
                 <p><a href=''>${bookmark.url}</a></p>  
                 <p><${bookmark.description}</p>
-                <button id='delete'>Delete</button>
+                <button class= "delete" id='delete-button'>Delete</button>
         </div>`
     };
 };
@@ -69,8 +67,9 @@ function renderBookmark(bookmark) {
 /////////////////////////////////////////////////
 function addingBookMark() {
     let bookMarkList = `
+    <div class "error-ctr"></div>
     <form id="new-bookmark>
-    < div class = 'bookmark'>
+    <div class='bookmark'>
         <label id = "bookmark-name"> Bookmark Name:</label>
         <input type="text" name= "title" placeholder="Bookmark goes here"
         id="bookmark-title" required>
@@ -81,30 +80,66 @@ function addingBookMark() {
         <input type="text" name="url" placeholder="https://google.com" id="url" required>
     </div>
 
+
+    <div>
+        <label id="filter-dropdown"> Filter By Rating:</label>
+        <select name="js-add-rating-dropdown">
+            <option value="" disabled selected hidden></option>
+            <option value="1">1 star</option>
+            <option value="2">2 star</option>
+            <option value="3">3 star</option>
+            <option value="4">4 star</option>
+            <option value="5">5 star</option>
+        </select>
+    </div>
+
     <div class='new-bookmark'>
-         <label id="descripton">Description:</label>
+        <label id="descripton">Description:</label>
         <input type="text" name="Description" placeholder="Google" id="description">
      </div>
 
-    <div class ="toggle-button" hide> 
+    <div class="toggle-button" hide> 
         <button type='submit' id='save'>Add</button>
     </div> 
     </form>`
     return bookMarkList;
 }
 
-
+function generateError(message) {
+    const temp = `
+        <section>
+            <p>${message}</p>
+        </section>
+    `;
+    return temp;
+}
 
 ////////////////////////////////////////////////////////
 // render function
 ////////////////////////////////////////////////////////
 function render() {
     console.log('render is working')
-    if (!store.adding) {
-        $('body').html(loadStartPage(store.bookmarks));
-    } else {
+    $('body').html(loadStartPage());
+
+    if (store.error) {
+        const erElement = generateError(store.error);
+        $('.error-ctr').html(erElement);  
+    }
+
+    if (store.adding === true) {
         $('body').html(addingBookMark());
     }
+    return;
 };
+
+
+// function renderError(){
+//     if (store.error) {
+//       const erElement = generateError(store.error);
+//       $('.error-ctr').html(erElement);
+//     } else {
+//       $('.error-ctr').empty();
+//     }
+//   };
 
 export default render;

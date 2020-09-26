@@ -13,17 +13,14 @@ import api from './api';
 
 function main() {
   console.log('main is working')
-  bookmark.whenAddButtonIsClicked();
-  bookmark.addNewBookmark();
-  bookmark.getBookmarkId();
-  bookmark.expandBookmark();
-  bookmark.collapseBookmark();
-  bookmark.deleteBookmark();
   
   api.getItems().then(items => {
     store.addItems(items)
     render();
+    bookmark.eventBinder();
   })
+
+  
 }
 
 

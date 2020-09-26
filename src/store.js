@@ -3,11 +3,11 @@ import $ from 'jquery';
 // // //PAGE TO HOUSE GLOBAL STORE /////////////////////
 
 //create bookmarkList as empty array
-const bookmarks = [];
+let bookmarks = [];
 let error = null;
-let filter = false;
+let filter = 0;
 let adding = false;
-let filteredBookmarks = [];
+//et filteredBookmarks = [];
 
 // function to find by id
 const findById = function (id) {
@@ -23,19 +23,12 @@ const addItem = function (item) {
 const addItems = function (items) {
     bookmarks.push(...items);
 };
-  
-//delete item
+
+
 const findAndDelete = function (id) {
-   let bookmark = bookmarks.filter(currentBookmark => {
-        if (currentBookmark.id !== id) {
-            return true;
-        }
-        else {
-            return false;
-       };
-    });
-};
-// bookmarks = bookmarks.filter(currentBookmark => {
+    const localBookmarkId = bookmarks.findIndex(bookmark => bookmark.id === id);
+    return bookmarks.splice(localBookmarkId, 1);
+}
 
   //update item
   const findAndUpdate = function (id, newItem){
@@ -45,13 +38,11 @@ const findAndDelete = function (id) {
 
 
   // filter 
-  const filterBookmarks = function (rating){
-    filter = true;
-    bookmarks.forEach(bookmark => {
-        if(bookmark.rating >= rating) {
-            bookmarks.push(bookmark);
-        } 
-    })
+  const changeFilter = function (num){
+    if (filter === parseInt(num)) {
+        return;
+    }
+    return filter = num;
   };
 
 
@@ -69,13 +60,13 @@ export default {
     error,
     filter,
     adding,
-    filteredBookmarks,
+   // filteredBookmarks,
     findById,
     addItem,
     addItems,
     findAndDelete,
     findAndUpdate,
-    filterBookmarks,
+    changeFilter,
     ratingfilter,
     setError,
 
