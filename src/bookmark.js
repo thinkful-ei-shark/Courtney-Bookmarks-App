@@ -88,7 +88,7 @@ function collapseBookmark() {
     })
 }
 
-
+///// have to delete right item, possibly by finding the id for it - function runs, just does not delete item.
 //////////// Delete Button Event Listener
 function deleteBookmark() {
     $('body').on('click', '#delete', function (event) {
