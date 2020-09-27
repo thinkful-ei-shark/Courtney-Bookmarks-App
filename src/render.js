@@ -17,11 +17,11 @@ function loadStartPage() {
     
         <label id="filter-dropdown"> Filter By Rating:</label>
         <select name="filterby" class="js-filter-by-rating" id="filter">
-          <option value="1">1 star</option>
-          <option value="2">2 star</option>
-          <option value="3">3 star</option>
-          <option value="4">4 star</option>
-          <option value="5">5 star</option>
+          <option value="1">1+ stars</option>
+          <option value="2">2+ stars</option>
+          <option value="3">3+ stars</option>
+          <option value="4">4+ stars</option>
+          <option value="5">5+ stars</option>
         </select>
         </form>
         </div>`
@@ -85,7 +85,7 @@ function addingBookMark() {
     <div class "error-ctr"></div>
     <form id="new-bookmark>
     <div class='bookmark'>
-        <label id = "bookmark-name"> Bookmark Name:</label>
+        <label id="bookmark-name">Name:</label>
         <input type="text" name= "title" placeholder="Bookmark goes here"
         id="bookmark-title" required>
     </div> 
@@ -97,7 +97,7 @@ function addingBookMark() {
 
 
     <div>
-        <label id="filter-dropdown"> Filter By Rating:</label>
+        <label id="filter-dropdown">Rating:</label>
         <select name="js-add-rating-dropdown">
             <option value="" disabled selected hidden></option>
             <option value="1">1 star</option>

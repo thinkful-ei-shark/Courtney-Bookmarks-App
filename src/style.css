@@ -1,4 +1,10 @@
-body{   
+/*mobile first */
+* {
+    margin: 10px;
+  }
+
+html body {
+    border: solid;
     background: pink;
     display: flex;
     flex-direction: column;
@@ -8,6 +14,41 @@ body{
 }
 
 
+.select{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+button  {
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 10px
+}
+
+/* link styling 
+* create a box for all content 
+* flex-box proper usage
+*.bookmark-section {}
+*
 
 
 
+
+
+
+
+
+
+
+
+
+
+/* desktop styling*/
+
+@media all and (min-width: 700px) {
+    .group {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        align-content: center;
+        margin-top: 10px;
+    }
+}
