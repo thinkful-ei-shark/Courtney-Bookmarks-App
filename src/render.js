@@ -4,7 +4,7 @@ import store from './store'
 
 
 ////////////////////////////////////////////////////////
-// Starting View 
+// STARTING VIEW/TEMPLATE
 ////////////////////////////////////////////////////////
 
 function loadStartPage() {
@@ -27,8 +27,7 @@ function loadStartPage() {
         </div>`
     if (store.bookmarks.length === 0) {
         startPage += `<h1>No Bookmarks Found</h1>`
-    }
-    else {
+    } else {
         for (let i = 0; i < bookmarks.length; i++) {
             startPage += renderBookmark(bookmarks[i])
         }
@@ -36,14 +35,30 @@ function loadStartPage() {
     return startPage;
 }
 
+////////////////////////////////////////////////////////
+//FUNCTION FOR FILTERING WITH THE DROPDOWN
+////////////////////////////////////////////////////////
+function filterDropdown(bookmarkRating) {
+    let options = ''
+    for (let i = 1; i <= 5; i++) {
+        if (bookmarkRating === i) {
+            options += `<option class ="rating-drop-down" 
+            selected="selected" value="${i}"+ stars/</option>`
+        } else {
+            options += `<option class="rating-drop-down" value="${i}">${i}+ stars</option>`
+        }
+    };
+    return options;
+};
+
 
 
 ////////////////////////////////////////////////////////
-// FUNCTION FOR A COLLAPSED VIEW 
+// FUNCTION FOR A COLLAPSED VIEW / EXPANDED VIEW
 ////////////////////////////////////////////////////////
 
 function renderBookmark(bookmark) {
-    console.log(bookmark)
+    // console.log(bookmark)
     if (!bookmark.expanded) {
         return `<div class="bookmark-section" data-item-id="${bookmark.id}">
                 <h3>${bookmark.title} ${bookmark.rating ? bookmark.rating : 'No Rating'}               
@@ -115,22 +130,34 @@ function generateError(message) {
 }
 
 ////////////////////////////////////////////////////////
-// render function
+// RENDER FUNCTION
 ////////////////////////////////////////////////////////
 function render() {
-    console.log('render is working')
-    $('body').html(loadStartPage());
+    generateError();
 
-    if (store.error) {
-        const erElement = generateError(store.error);
-        $('.error-ctr').html(erElement);  
+    $('body').html(loadStartPage(store.bookmarks, 1));
+    if (store.adding) {
+        $('body').html(addingBookMark())
+    } else if (store.filter) {
+        $('body').html(loadStartPage(store.bookmarks, store.bookmarkRating))
     }
+}
 
-    if (store.adding === true) {
-        $('body').html(addingBookMark());
-    }
-    return;
-};
+
+// function render() {
+//     console.log('render is working')
+//     $('body').html(loadStartPage());
+
+//     if (store.error) {
+//         const erElement = generateError(store.error);
+//         $('.error-ctr').html(erElement);  
+//     }
+
+//     if (store.adding === true) {
+//         $('body').html(addingBookMark());
+//     }
+//     return;
+// };
 
 
 

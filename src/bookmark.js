@@ -6,8 +6,26 @@ import render from './render'
 
 
 /// PAGE FOR EVENT LISTENERS
+//////////////////////////////////////////////////////
+///// Event Listener to filter bookmarks by star rating
+//////////////////////////////////////////////////////
 
-// // EVENT LIST. FOR WHEN ADD NEW BUTTON IS CLICKED TO SHOW THE BOOKMARK LIST PAGE
+function filterSavedBookmarks() {
+    $('body').on('change', '#filter', function (event) {
+        const bookmarkRating = parseInt($('#filter').val());
+        // console.log('rating', bookmarkRating)
+        store.filterBookmarksByStars(bookmarkRating)
+        store.filter = true;
+        render();
+    })
+}
+
+
+
+//////////////////////////////////////////////////////
+// EVENT LIST. FOR WHEN ADD NEW BUTTON IS CLICKED TO SHOW THE BOOKMARK LIST PAGE
+//////////////////////////////////////////////////////
+
 function whenAddButtonIsClicked() {
     $('body').on('click', '#add-new-button', function (event) {
         event.preventDefault();
@@ -18,9 +36,11 @@ function whenAddButtonIsClicked() {
     })
 };
 
-
+//////////////////////////////////////////////////////
 // EVENT LIST. FOR WHEN ADD NEW BUTTON IS CLICKED TO ADD NEW CONTENT TO LIST 
 //- watch for click of sumbit - to get info on input
+//////////////////////////////////////////////////////
+
 function addNewBookmark() {
     $('body').on('click', '#save', function (event) {
         event.preventDefault();
@@ -56,16 +76,20 @@ function addNewBookmark() {
 
     });
 };
+//////////////////////////////////////////////////////
+////// FUNCTION to get id
+//////////////////////////////////////////////////////
 
-////// FUNCTION 
 function getBookmarkId(bookmark) {
     return $(bookmark)
         .closest('.bookmark-section')
         .data('item-id');
 }
 
-
+//////////////////////////////////////////////////////
 /// function to show expanded view
+//////////////////////////////////////////////////////
+
 function expandBookmark() {
     $('body').on('click', '#expand', function (event) {
         const id = getBookmarkId(event.currentTarget);
@@ -88,8 +112,11 @@ function collapseBookmark() {
     })
 }
 
-///// have to delete right item, possibly by finding the id for it - function runs, just does not delete item.
-//////////// Delete Button Event Listener
+
+//////////////////////////////////////////////////////
+// Delete Button Event Listener
+//////////////////////////////////////////////////////
+
 function deleteBookmark() {
     $('body').on('click', '#delete-button', function (event) {
         const id = getBookmarkId(event.currentTarget);
@@ -107,14 +134,17 @@ function deleteBookmark() {
     });
 };
 
-
+//////////////////////////////////////////////////////
+//Event Binder
+//////////////////////////////////////////////////////
 
 function eventBinder() {
     $('.js-filter-by-rating').on('change', (e) => {
         store.changeFilter(e.currentTarget.value);
-        console.log('working')
+        console.log('event binder working')
         return render();
     })
+    filterSavedBookmarks();
     whenAddButtonIsClicked();
     addNewBookmark();
     getBookmarkId();

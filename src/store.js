@@ -5,9 +5,9 @@ import $ from 'jquery';
 //create bookmarkList as empty array
 let bookmarks = [];
 let error = null;
-let filter = 0;
+let filter = false;
 let adding = false;
-// bookmarkRating = 0;
+let bookmarkRating = 0;
 
 
 // function to find by id
@@ -47,9 +47,9 @@ const findAndDelete = function (id) {
   };
 
 
-//  for ratings 
-const ratingfilter = function (value) {
-    ratingfilter = value;
+ //for filtering the ratings dropdown
+const filterBookmarksByStars = function (value) {
+    bookmarkRating = value;
 } 
 
 const setError = function (error) {
@@ -61,14 +61,13 @@ export default {
     error,
     filter,
     adding,
-   // filteredBookmarks,
     findById,
     addItem,
     addItems,
     findAndDelete,
     findAndUpdate,
     changeFilter,
-    ratingfilter,
+    filterBookmarksByStars,
     setError,
 
 }
