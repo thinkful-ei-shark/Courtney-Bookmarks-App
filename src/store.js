@@ -7,7 +7,8 @@ let bookmarks = [];
 let error = null;
 let filter = 0;
 let adding = false;
-//et filteredBookmarks = [];
+// bookmarkRating = 0;
+
 
 // function to find by id
 const findById = function (id) {

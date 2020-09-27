@@ -39,7 +39,7 @@ function loadStartPage() {
 
 
 ////////////////////////////////////////////////////////
-// FUNCTION FOR A COLLAPSED VIEW ?
+// FUNCTION FOR A COLLAPSED VIEW 
 ////////////////////////////////////////////////////////
 
 function renderBookmark(bookmark) {
@@ -54,8 +54,8 @@ function renderBookmark(bookmark) {
         return ` <div class= "bookmark-section" data-item-id="${bookmark.id}">
              <h3>${bookmark.title} ${bookmark.rating ? bookmark.rating : 'No Rating'}</h3>
              <button id='collapse'>Collapse</button>
-                <p><a href=''>${bookmark.url}</a></p>  
-                <p><${bookmark.description}</p>
+                <p><a href="${bookmark.url}">${bookmark.title}</a></p>
+                <p>${bookmark.desc}</p>
                 <button class= "delete" id='delete-button'>Delete</button>
         </div>`
     };
@@ -94,7 +94,7 @@ function addingBookMark() {
     </div>
 
     <div class='new-bookmark'>
-        <label id="descripton">Description:</label>
+        <label id="description-box">Description:</label>
         <input type="text" name="Description" placeholder="Google" id="description">
      </div>
 
@@ -133,13 +133,5 @@ function render() {
 };
 
 
-// function renderError(){
-//     if (store.error) {
-//       const erElement = generateError(store.error);
-//       $('.error-ctr').html(erElement);
-//     } else {
-//       $('.error-ctr').empty();
-//     }
-//   };
 
 export default render;
