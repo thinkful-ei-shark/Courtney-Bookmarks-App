@@ -14,8 +14,9 @@ function filterSavedBookmarks() {
     $('body').on('change', '#filter', function (event) {
         const bookmarkRating = parseInt($('#filter').val());
         // console.log('rating', bookmarkRating)
-        store.filterBookmarksByStars(bookmarkRating)
-        store.filter = true;
+       // store.filterBookmarksByStars(bookmarkRating)
+      store.filter = bookmarkRating;
+      console.log(store.filter)
         render();
     })
 }
@@ -139,15 +140,15 @@ function deleteBookmark() {
 //////////////////////////////////////////////////////
 
 function eventBinder() {
-    $('.js-filter-by-rating').on('change', (e) => {
-        store.changeFilter(e.currentTarget.value);
-        console.log('event binder working')
-        return render();
-    })
+    // $('.js-filter-by-rating').on('change', (e) => {
+    //     store.changeFilter(e.currentTarget.value);
+    //     console.log('event binder working')
+    //     return render();
+    
     filterSavedBookmarks();
     whenAddButtonIsClicked();
     addNewBookmark();
-    getBookmarkId();
+    // getBookmarkId();
     expandBookmark();
     collapseBookmark();
     deleteBookmark();

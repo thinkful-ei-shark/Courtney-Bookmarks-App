@@ -5,7 +5,7 @@ import $ from 'jquery';
 //create bookmarkList as empty array
 let bookmarks = [];
 let error = null;
-let filter = false;
+let filter = 1;
 let adding = false;
 let bookmarkRating = 0;
 
