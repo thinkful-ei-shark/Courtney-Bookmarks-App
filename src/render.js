@@ -137,9 +137,9 @@ function generateError(message) {
 function render() {
     generateError();
 
-    $('body').html(loadStartPage(store.bookmarks, 1));
+    $('main').html(loadStartPage(store.bookmarks, 1));
     if (store.adding) {
-        $('body').html(addingBookMark())
+        $('main').html(addingBookMark())
     // } else if (store.filter) {
     //     $('body').html(loadStartPage(store.bookmarks, store.bookmarkRating))
     }

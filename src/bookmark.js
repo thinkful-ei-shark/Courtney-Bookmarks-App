@@ -11,10 +11,8 @@ import render from './render'
 //////////////////////////////////////////////////////
 
 function filterSavedBookmarks() {
-    $('body').on('change', '#filter', function (event) {
+    $('main').on('change', '#filter', function (event) {
         const bookmarkRating = parseInt($('#filter').val());
-        // console.log('rating', bookmarkRating)
-       // store.filterBookmarksByStars(bookmarkRating)
       store.filter = bookmarkRating;
       console.log(store.filter)
         render();
@@ -28,12 +26,11 @@ function filterSavedBookmarks() {
 //////////////////////////////////////////////////////
 
 function whenAddButtonIsClicked() {
-    $('body').on('click', '#add-new-button', function (event) {
+    $('main').on('click', '#add-new-button', function (event) {
         event.preventDefault();
         console.log('whenAddButtonIsClicked ran')
         store.adding = true;
         render();
-        // I want the start page buttons to stay up when the new page loads
     })
 };
 
@@ -43,7 +40,7 @@ function whenAddButtonIsClicked() {
 //////////////////////////////////////////////////////
 
 function addNewBookmark() {
-    $('body').on('click', '#save', function (event) {
+    $('main').on('click', '#save', function (event) {
         event.preventDefault();
         console.log('addNewBookmark ran')
         let newTitle = $('#bookmark-title').val();
@@ -92,7 +89,7 @@ function getBookmarkId(bookmark) {
 //////////////////////////////////////////////////////
 
 function expandBookmark() {
-    $('body').on('click', '#expand', function (event) {
+    $('main').on('click', '#expand', function (event) {
         const id = getBookmarkId(event.currentTarget);
         console.log('expandBookmark ran')
         console.log(id)
@@ -103,7 +100,7 @@ function expandBookmark() {
 }
 
 function collapseBookmark() {
-    $('body').on('click', '#collapse', function (event) {
+    $('main').on('click', '#collapse', function (event) {
         const id = getBookmarkId(event.currentTarget);
         console.log('collapseBookmark ran');
         console.log(event.currentTarget)
@@ -119,7 +116,7 @@ function collapseBookmark() {
 //////////////////////////////////////////////////////
 
 function deleteBookmark() {
-    $('body').on('click', '#delete-button', function (event) {
+    $('main').on('click', '#delete-button', function (event) {
         const id = getBookmarkId(event.currentTarget);
         console.log(id)
         api.deleteItem(id)
@@ -140,21 +137,13 @@ function deleteBookmark() {
 //////////////////////////////////////////////////////
 
 function eventBinder() {
-    // $('.js-filter-by-rating').on('change', (e) => {
-    //     store.changeFilter(e.currentTarget.value);
-    //     console.log('event binder working')
-    //     return render();
-    
     filterSavedBookmarks();
     whenAddButtonIsClicked();
     addNewBookmark();
-    // getBookmarkId();
     expandBookmark();
     collapseBookmark();
     deleteBookmark();
 }
-
-
 
 export default {
     eventBinder
