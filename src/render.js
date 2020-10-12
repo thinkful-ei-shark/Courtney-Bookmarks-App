@@ -87,13 +87,13 @@ function addingBookMark() {
     <div class "error-ctr"></div>
     <form id="new-bookmark>
     <div class='bookmark'>
-        <label id="bookmark-name">Name:</label>
+        <label for="bookmark-name">Name:</label>
         <input type="text" name= "title" placeholder="Bookmark goes here"
         id="bookmark-title" required>
     </div> 
 
     <div class='new-bookmark'>
-        <label id="url-label">URL:</label>
+        <label for="url-label">URL:</label>
         <input type="text" name="url" placeholder="https://google.com" id="url" required>
     </div>
 
@@ -111,7 +111,7 @@ function addingBookMark() {
     </div>
 
     <div class='new-bookmark'>
-        <label id="description-box">Description:</label>
+        <label for="description-box">Description:</label>
         <input type="text" name="Description" placeholder="Google" id="description">
      </div>
 
@@ -140,26 +140,10 @@ function render() {
     $('main').html(loadStartPage(store.bookmarks, 1));
     if (store.adding) {
         $('main').html(addingBookMark())
-    // } else if (store.filter) {
-    //     $('body').html(loadStartPage(store.bookmarks, store.bookmarkRating))
     }
 }
 
 
-// function render() {
-//     console.log('render is working')
-//     $('body').html(loadStartPage());
-
-//     if (store.error) {
-//         const erElement = generateError(store.error);
-//         $('.error-ctr').html(erElement);  
-//     }
-
-//     if (store.adding === true) {
-//         $('body').html(addingBookMark());
-//     }
-//     return;
-// };
 
 
 

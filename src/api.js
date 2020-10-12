@@ -1,5 +1,4 @@
-// PAGE TO HOUSE ALL API FUNCITONS 
-
+// PAGE TO HOUSE  API FUNCITONS
 
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/carson';
 
