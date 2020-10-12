@@ -15,21 +15,23 @@ function loadStartPage() {
     <form  class = "button">
         <button type="submit" id="add-new-button">Add Bookmark</button>
     
-        <label id="filter-dropdown"> Filter By Rating:</label>
-        <select name="filterby" class="js-filter-by-rating" id="filter">
-          <option value="1">1+ stars</option>
-          <option value="2">2+ stars</option>
-          <option value="3">3+ stars</option>
-          <option value="4">4+ stars</option>
-          <option value="5">5+ stars</option>
+        <label for="filter"> Filter By Rating:</label>
+        <select name="filterby" class="js-filter-by-rating" id="filter" >
+       
+          <option value="1" ${ store.filter === 1 ? 'selected' : '' }>1+ stars</option>
+          <option value="2" ${ store.filter === 2 ? 'selected' : '' }>2+ stars</option>
+          <option value="3" ${ store.filter === 3 ? 'selected' : '' }>3+ stars</option>
+          <option value="4" ${ store.filter === 4 ? 'selected' : '' }>4+ stars</option>
+          <option value="5" ${ store.filter === 5 ? 'selected' : '' }>5+ stars</option>
         </select>
         </form>
         </div>`
-    if (store.bookmarks.length === 0) {
+  let filteredBookmarks = store.bookmarks.filter(bookmark => bookmark.rating >= store.filter)
+    if (filteredBookmarks.length === 0) {
         startPage += `<h1>No Bookmarks Found</h1>`
     } else {
-        for (let i = 0; i < bookmarks.length; i++) {
-            startPage += renderBookmark(bookmarks[i])
+        for (let i = 0; i < filteredBookmarks.length; i++) {
+            startPage += renderBookmark(filteredBookmarks[i])
         }
     }
     return startPage;
@@ -97,7 +99,7 @@ function addingBookMark() {
 
 
     <div>
-        <label id="filter-dropdown">Rating:</label>
+        <label for="filter-dropdown">Rating:</label>
         <select name="js-add-rating-dropdown">
             <option value="" disabled selected hidden></option>
             <option value="1">1 star</option>
@@ -138,8 +140,8 @@ function render() {
     $('body').html(loadStartPage(store.bookmarks, 1));
     if (store.adding) {
         $('body').html(addingBookMark())
-    } else if (store.filter) {
-        $('body').html(loadStartPage(store.bookmarks, store.bookmarkRating))
+    // } else if (store.filter) {
+    //     $('body').html(loadStartPage(store.bookmarks, store.bookmarkRating))
     }
 }
 
