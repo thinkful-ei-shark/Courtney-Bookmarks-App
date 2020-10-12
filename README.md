@@ -1,10 +1,11 @@
 # Courtney-Bookmarks-App
 
+https://thinkful-ei-shark.github.io/Courtney-Bookmarks-App/
+
 Bookmarks Application for Asynchronous Web Apps Module 
 
 
 User Stories
-As a user:
 
 I can add bookmarks to my bookmark list. Bookmarks contain:
 
