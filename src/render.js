@@ -100,7 +100,7 @@ function addingBookMark() {
 
     <div>
         <label for="filter-dropdown">Rating:</label>
-        <select name="js-add-rating-dropdown">
+        <select name="js-add-rating-dropdown" required>
             <option value="" disabled selected hidden></option>
             <option value="1">1 star</option>
             <option value="2">2 star</option>
@@ -111,8 +111,8 @@ function addingBookMark() {
     </div>
 
     <div class='new-bookmark'>
-        <label for="description-box">Description:</label>
-        <input type="text" name="Description" placeholder="Google" id="description">
+        <label id="description-box">Description:</label>
+        <input type="text" name="Description" placeholder="Google" id="description" required>
      </div>
 
     <div class="toggle-button" hide> 
@@ -122,26 +122,28 @@ function addingBookMark() {
     return bookMarkList;
 }
 
-function generateError(message) {
-    const temp = `
-        <section>
-            <p>${message}</p>
-        </section>
-    `;
-    return temp;
-}
+// function generateError(message) {
+//     const temp = `
+//         <section>
+//             <p>${message}</p>
+//         </section>
+//     `;
+//     return temp;
+// }
 
 ////////////////////////////////////////////////////////
 // RENDER FUNCTION
 ////////////////////////////////////////////////////////
 function render() {
-    generateError();
+    // generateError();
 
     $('main').html(loadStartPage(store.bookmarks, 1));
     if (store.adding) {
         $('main').html(addingBookMark())
+   
     }
 }
+
 
 
 
