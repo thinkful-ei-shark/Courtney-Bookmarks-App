@@ -122,20 +122,20 @@ function addingBookMark() {
     return bookMarkList;
 }
 
-// function generateError(message) {
-//     const temp = `
-//         <section>
-//             <p>${message}</p>
-//         </section>
-//     `;
-//     return temp;
-// }
+function generateError(message) {
+    const temp = `
+        <section>
+            <p>${message}</p>
+        </section>
+    `;
+    return temp;
+}
 
 ////////////////////////////////////////////////////////
 // RENDER FUNCTION
 ////////////////////////////////////////////////////////
 function render() {
-    // generateError();
+    generateError();
 
     $('main').html(loadStartPage(store.bookmarks, 1));
     if (store.adding) {

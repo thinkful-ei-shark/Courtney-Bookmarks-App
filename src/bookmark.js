@@ -47,7 +47,13 @@ function addNewBookmark() {
         let newUrl = $('#url').val();
         let newDescription = $('#description').val();
         let newRating = $(this).parent().parent().find('select');
-        store.adding = false;
+      store.adding = false;
+      if((newUrl === "") || (newTitle === "") || (newDescription === "")) {
+        alert('Please fill out all fields')
+      }
+      
+      
+
 
 
         let newBookmark = {
